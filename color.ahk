@@ -71,7 +71,7 @@ LButton Up::
     CursorHandle := DllCall("LoadCursor", Uint, 0, Int, IDC_CROSS)
     Cursors = 32512,32513,32514,32515,32516,32640,32641,32642,32643,32644,32645,32646,32648,32649,32650,32651
     Loop, Parse, Cursors, `,
-	    DllCall( SetSystemCursor", Uint, CursorHandle, Int, A_Loopfield 
+	    DllCall("SetSystemCursor", Uint, CursorHandle, Int, A_Loopfield)
   }
   return
 
