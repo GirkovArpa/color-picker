@@ -94,3 +94,7 @@ LButton Up::
   }
   return
 
+  GuiClose:
+    exitapp
+    return
+
