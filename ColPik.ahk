@@ -1,6 +1,6 @@
 #SingleInstance Force
 
-Menu, Tray,  Icon, icon.ico
+;Menu, Tray,  Icon, icon.ico
 
 global clicking := false
 global color := ""
