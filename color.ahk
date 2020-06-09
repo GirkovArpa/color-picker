@@ -1,5 +1,8 @@
 #SingleInstance Force
+
 global clicking := false
+global color := ""
+global index := 0
 
 IDC_ARROW := 32512
 IDC_IBEAM := 32513
@@ -24,31 +27,34 @@ IDC_HELP := 32651
 ;    MsgBox, Color number %A_Index% is %A_LoopField%.
 
 
-Gui, Add, Button, x30 y130 w100 h20 , Click && Hold
-Gui, Add, GroupBox, x30 y24 w100 h107 , 
-Gui, Add, Edit, x32 y4 w96 h20 right, Edit
-for i in [1, 2, 3] {
-  for j in [1, 2, 3] {
-    X := i * 32
-    Y := j * 32
+Gui, Add, Button, x2 y130 w100 h20 , Click && Hold
+Gui, Add, GroupBox, x2 y24 w100 h107 , 
+Gui, Add, Edit, x2 y4 w96 h20 right vEdit1
+for i in [0, 1, 2] {
+  for j in [0, 1, 2] {
+    X := (i * 32)
+    Y := (j * 32)
+    X -= 28
     Gui, Add, Progress, x%X% y%Y% w32 h32 cGreen vMyProgress%i%_%j%, 100
   }
 }
-Gui, Show, x381 y170 h379 w483, 
+Gui, Show, x381 y170 h379 w104, ColPik
+
+Gui -MinimizeBox -Resize -MaximizeBox  ; Change the settings of the default GUI window.
 
 SetTimer, myLoop, 10
 
-myLoop(){
+myLoop() {
   if (not clicking) 
     return
-  for i in [1, 2, 3] {
-    for j in [1, 2, 3] {
+  for i in [0, 1, 2] {
+    for j in [0, 1, 2] {
       MouseGetPos, MouseX, MouseY
       MouseX += i
       MouseY += j
       PixelGetColor, color, %MouseX%, %MouseY%, RGB
       GuiControl +C%color%, MyProgress%i%_%j%
-      if (i = 2 and j = 2) {
+      if (i = 1 and j = 1) {
         color := StrReplace(color, "0x", "#")
         Tooltip, %color%
         GuiControl, Text, Edit1, %color%
@@ -59,6 +65,14 @@ myLoop(){
 }
 
 LButton Up::
+  if (clicking) {
+    Y := (index * 22) + 155
+    GuiControlGet, Edit1
+    Gui, Add, Edit, x3 y%Y% w76 h20 right, %Edit1%
+    Edit1 := StrReplace(Edit1, "#", "0x")
+    Gui, Add, Progress, x81 y%Y% w20 h20 c%Edit1% vTempMyProgress%index%, 100
+    index += 1
+  }
   clicking := false
   SPI_SETCURSORS := 0x57
   DllCall("SystemParametersInfo", UInt, SPI_SETCURSORS, UInt, 0, UInt, 0, UInt, 0)
