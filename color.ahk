@@ -38,7 +38,7 @@ for i in [0, 1, 2] {
     Gui, Add, Progress, x%X% y%Y% w32 h32 cGreen vMyProgress%i%_%j%, 100
   }
 }
-Gui, Show, x381 y170 h379 w104, ColPik
+Gui, Show, x381 y170 h154 w104, ColPik
 
 Gui -MinimizeBox -Resize -MaximizeBox  ; Change the settings of the default GUI window.
 
@@ -72,6 +72,9 @@ LButton Up::
     Edit1 := StrReplace(Edit1, "#", "0x")
     Gui, Add, Progress, x81 y%Y% w20 h20 c%Edit1% vTempMyProgress%index%, 100
     index += 1
+    newHeight := 154 + (index * 23)
+    Gui, Show, w104 h%newHeight%
+    ;ui -MinimizeBox -Resize -MaximizeBox 
   }
   clicking := false
   SPI_SETCURSORS := 0x57
