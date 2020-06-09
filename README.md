@@ -1,0 +1,1 @@
+![GIF screencapture from Imgur](https://i.imgur.com/b6fLeBk.gif)
