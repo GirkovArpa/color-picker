@@ -1,5 +1,7 @@
 #SingleInstance Force
 
+Menu, Tray,  Icon, icon.ico
+
 global clicking := false
 global color := ""
 global index := 0
@@ -27,7 +29,7 @@ IDC_HELP := 32651
 ;    MsgBox, Color number %A_Index% is %A_LoopField%.
 
 
-Gui, Add, Button, x2 y130 w100 h20 , Click && Hold
+Gui, Add, Button, x2 y130 w100 h20 , Click && Drag
 Gui, Add, GroupBox, x2 y24 w100 h107 , 
 Gui, Add, Edit, x2 y4 w96 h20 right vEdit1
 for i in [0, 1, 2] {
