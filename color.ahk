@@ -74,9 +74,9 @@ LButton Up::
     index += 1
     newHeight := 154 + (index * 23)
     Gui, Show, w104 h%newHeight%
-    ;ui -MinimizeBox -Resize -MaximizeBox 
   }
   clicking := false
+  ToolTip
   SPI_SETCURSORS := 0x57
   DllCall("SystemParametersInfo", UInt, SPI_SETCURSORS, UInt, 0, UInt, 0, UInt, 0)
   return
